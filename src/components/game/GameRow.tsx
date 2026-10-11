@@ -8,7 +8,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { LetterEvaluation, TileStatus } from '../../types/game';
 import { GameTile } from './GameTile';
-import { spacing } from '../../constants/theme';
 import { usePrefersReducedMotion } from '../../utils/motion';
 
 export interface GameRowProps {
@@ -16,6 +15,7 @@ export interface GameRowProps {
   evaluations?: LetterEvaluation[];
   isCurrent?: boolean;
   tileSize: number;
+  tileGap?: number;
   isRevealing?: boolean;
   isWinningRow?: boolean;
   shakeTrigger?: number;
@@ -26,6 +26,7 @@ export const GameRow: React.FC<GameRowProps> = ({
   evaluations,
   isCurrent = false,
   tileSize,
+  tileGap = 6,
   isRevealing = false,
   isWinningRow = false,
   shakeTrigger = 0,
@@ -55,6 +56,7 @@ export const GameRow: React.FC<GameRowProps> = ({
   });
 
   const tiles = [];
+  const halfGap = Math.floor(tileGap / 2);
 
   for (let i = 0; i < 5; i++) {
     const letter = word[i] || '';
@@ -80,7 +82,13 @@ export const GameRow: React.FC<GameRowProps> = ({
   }
 
   return (
-    <Animated.View style={[styles.rowContainer, animatedRowStyle]}>
+    <Animated.View
+      style={[
+        styles.rowContainer,
+        { columnGap: tileGap, marginVertical: halfGap },
+        animatedRowStyle,
+      ]}
+    >
       {tiles}
     </Animated.View>
   );
@@ -90,7 +98,5 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    columnGap: spacing.xs + 2, // 6px gap
-    marginVertical: 3,
   },
 });

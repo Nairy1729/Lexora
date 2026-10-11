@@ -69,6 +69,7 @@ export interface UseGameReturn {
   shareText: string;
   shareGame: () => Promise<boolean>;
   copyShareGrid: () => Promise<boolean>;
+  isHydrated: boolean;
 }
 
 export function useGame(): UseGameReturn {
@@ -95,6 +96,7 @@ export function useGame(): UseGameReturn {
 
   // Tracks whether initial storage restoration has completed
   const isHydratedRef = useRef<boolean>(false);
+  const [isHydrated, setIsHydrated] = useState<boolean>(false);
 
   // Clean up any pending animation timers on unmount
   useEffect(() => {
@@ -154,6 +156,7 @@ export function useGame(): UseGameReturn {
         });
       } finally {
         isHydratedRef.current = true;
+        setIsHydrated(true);
       }
     }
 
@@ -464,5 +467,6 @@ export function useGame(): UseGameReturn {
     shareText,
     shareGame,
     copyShareGrid,
+    isHydrated,
   };
 }

@@ -31,7 +31,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "npx tsx --test src/engine/__tests__/evaluator.test.ts src/engine/__tests__/dailySelector.test.ts src/engine/__tests__/gameEngine.test.ts src/storage/__tests__/storage.test.ts src/engine/__tests__/animationAndHaptics.test.ts src/engine/__tests__/shareAndSettings.test.ts src/engine/__tests__/keyboardInput.test.ts src/engine/__tests__/practiceModeIsolation.test.ts src/engine/__tests__/dictionary.test.ts src/utils/__tests__/notifications.test.ts src/security/__tests__/securitySanitization.test.ts",
+    "test": "npx tsx --test src/engine/__tests__/evaluator.test.ts src/engine/__tests__/dailySelector.test.ts src/engine/__tests__/gameEngine.test.ts src/storage/__tests__/storage.test.ts src/engine/__tests__/animationAndHaptics.test.ts src/engine/__tests__/shareAndSettings.test.ts src/engine/__tests__/keyboardInput.test.ts src/engine/__tests__/practiceModeIsolation.test.ts src/engine/__tests__/dictionary.test.ts src/utils/__tests__/notifications.test.ts src/security/__tests__/securitySanitization.test.ts src/engine/__tests__/launchExperience.test.ts",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "doctor": "npx expo-doctor",

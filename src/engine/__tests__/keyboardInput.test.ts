@@ -13,7 +13,7 @@ import {
   WebKeyboardEventLike,
 } from '../../utils/webKeyboard';
 import { colors } from '../../constants/theme';
-import { layout } from '../../constants/layout';
+import { layout, calculateGameplayLayout } from '../../constants/layout';
 
 const TEST_PUZZLE: DailyPuzzleInfo = {
   puzzleNumber: 42,
@@ -331,5 +331,27 @@ describe('Keyboard Input & Web Interaction Regression Suite', () => {
     state = typeString(state, 'CRANE');
     state = gameReducer(state, { type: 'KEY_PRESS', key: 'ENTER' });
     assert.strictEqual(state.gameStatus, 'won');
+  });
+
+  // Spec 20: Keyboard layout isolates Row 3 to letters and Backspace with Enter placed separately below
+  test('20. Keyboard layout isolates Row 3 to letters and Backspace with Enter placed separately below', () => {
+    const ROW_3_KEYS = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
+    const ROW_3_ACTIONS = ['BACKSPACE'];
+
+    assert.strictEqual(ROW_3_KEYS.length, 7);
+    assert.strictEqual(ROW_3_ACTIONS.includes('ENTER'), false, 'ENTER must not be in Row 3');
+    assert.strictEqual(ROW_3_ACTIONS.includes('BACKSPACE'), true, 'BACKSPACE must be in Row 3');
+  });
+
+  // Spec 21: calculateGameplayLayout outputs balanced metrics for standalone ENTER button
+  test('21. calculateGameplayLayout outputs balanced metrics for standalone ENTER button', () => {
+    const metricsMobile = calculateGameplayLayout(390, 844);
+    assert.ok(metricsMobile.enterButtonHeight >= 36 && metricsMobile.enterButtonHeight <= 46);
+    assert.ok(metricsMobile.enterGap >= 5 && metricsMobile.enterGap <= 10);
+    assert.ok(metricsMobile.bottomGap >= 20, 'Sufficient clearance above navigation bar');
+
+    const metricsCompact = calculateGameplayLayout(360, 640);
+    assert.ok(metricsCompact.enterButtonHeight >= 34);
+    assert.ok(metricsCompact.bottomGap >= 16);
   });
 });

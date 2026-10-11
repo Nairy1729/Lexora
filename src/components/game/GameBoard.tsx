@@ -12,6 +12,8 @@ export interface GameBoardProps {
   revealingRowIndex?: number | null;
   winningRowIndex?: number | null;
   shakeTrigger?: number;
+  tileSize?: number;
+  tileGap?: number;
 }
 
 export const GameBoard: React.FC<GameBoardProps> = ({
@@ -22,20 +24,26 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   revealingRowIndex = null,
   winningRowIndex = null,
   shakeTrigger = 0,
+  tileSize: customTileSize,
+  tileGap: customTileGap,
 }) => {
   const { width, height } = useWindowDimensions();
 
-  // Constrain width to mobile bounds
+  const effectiveTileGap = customTileGap ?? layout.gridGap;
+
+  // Constrain width to mobile bounds for fallback calculation
   const horizontalSpace = Math.min(width - 32, layout.maxContentWidth - 48);
-  const totalGaps = (layout.wordLength - 1) * layout.gridGap; // 4 * 6 = 24px
+  const totalGaps = (layout.wordLength - 1) * effectiveTileGap;
   const widthBasedSize = Math.floor((horizontalSpace - totalGaps) / layout.wordLength);
 
-  // Vertical constraint: calibrated to viewport height (~44%)
+  // Vertical constraint fallback
   const availableVerticalHeight = height * 0.44;
-  const heightBasedSize = Math.floor((availableVerticalHeight - (maxGuesses * layout.gridGap)) / maxGuesses);
+  const heightBasedSize = Math.floor((availableVerticalHeight - (maxGuesses * effectiveTileGap)) / maxGuesses);
 
-  // Responsive tile size clamped cleanly between 40px and 58px
-  const tileSize = Math.max(40, Math.min(widthBasedSize, heightBasedSize, 58));
+  // Responsive tile size fallback clamped cleanly between 40px and 58px
+  const calculatedTileSize = Math.max(40, Math.min(widthBasedSize, heightBasedSize, 58));
+
+  const effectiveTileSize = customTileSize ?? calculatedTileSize;
 
   const rows = [];
 
@@ -47,7 +55,8 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           key={rowIndex}
           word={guesses[rowIndex]}
           evaluations={evaluations[rowIndex]}
-          tileSize={tileSize}
+          tileSize={effectiveTileSize}
+          tileGap={effectiveTileGap}
           isRevealing={rowIndex === revealingRowIndex}
           isWinningRow={rowIndex === winningRowIndex}
         />
@@ -59,7 +68,8 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           key={rowIndex}
           word={currentGuess}
           isCurrent={true}
-          tileSize={tileSize}
+          tileSize={effectiveTileSize}
+          tileGap={effectiveTileGap}
           shakeTrigger={shakeTrigger}
         />
       );
@@ -68,7 +78,8 @@ export const GameBoard: React.FC<GameBoardProps> = ({
       rows.push(
         <GameRow
           key={rowIndex}
-          tileSize={tileSize}
+          tileSize={effectiveTileSize}
+          tileGap={effectiveTileGap}
         />
       );
     }
@@ -81,6 +92,6 @@ const styles = StyleSheet.create({
   boardContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 4,
+    paddingVertical: 2,
   },
 });

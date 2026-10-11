@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,8 +8,9 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { colors, spacing, borderRadius, typography } from './src/constants/theme';
-import { layout } from './src/constants/layout';
+import * as SplashScreen from 'expo-splash-screen';
+import { colors, spacing } from './src/constants/theme';
+import { layout, calculateGameplayLayout } from './src/constants/layout';
 import { useGame } from './src/hooks/useGame';
 import { GameHeader } from './src/components/game/GameHeader';
 import { GameBoard } from './src/components/game/GameBoard';
@@ -20,12 +21,17 @@ import { VictoryCelebration } from './src/components/game/VictoryCelebration';
 import { HelpModal } from './src/components/game/HelpModal';
 import { StatsModal } from './src/components/modals/StatsModal';
 import { SettingsModal } from './src/components/modals/SettingsModal';
+import { AppLaunchScreen } from './src/components/common/AppLaunchScreen';
 import { useWebKeyboard } from './src/hooks/useWebKeyboard';
 
+// Prevent static native splash screen from hiding prematurely
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
 export default function App() {
+  const [showLaunchScreen, setShowLaunchScreen] = useState(true);
   const [helpVisible, setHelpVisible] = useState(false);
   const [settingsVisible, setSettingsVisible] = useState(false);
-  const { height } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const {
     puzzleInfo,
@@ -54,24 +60,23 @@ export default function App() {
     resetAllData,
     shareText,
     shareGame,
+    isHydrated,
   } = useGame();
 
   const isGameOver = gameStatus !== 'playing';
   const isAnyModalVisible = helpVisible || isStatsVisible || settingsVisible;
 
+  // Dismiss native splash cleanly once React root has mounted with AppLaunchScreen
+  useEffect(() => {
+    SplashScreen.hideAsync().catch(() => {});
+  }, []);
+
   useWebKeyboard({
     onKeyPress,
-    disabled: isAnyModalVisible,
+    disabled: isAnyModalVisible || showLaunchScreen,
   });
 
-  // Responsive layout calibration:
-  // 1. Bottom breathing room: ensures the keyboard never crowds against Android gesture pill or 3-button nav
-  const bottomBreathingRoom = Platform.OS === 'android'
-    ? Math.max(20, Math.min(Math.round(height * 0.032), 30))
-    : Math.max(14, Math.min(Math.round(height * 0.024), 24));
-
-  // 2. Cohesive grid-to-keyboard bridge gap: maintains intimate visual dialogue between puzzle and keys (~14-22dp)
-  const boardKeyboardGap = Math.max(12, Math.min(Math.round(height * 0.022), 22));
+  const layoutMetrics = calculateGameplayLayout(width, height, isGameOver);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -96,8 +101,8 @@ export default function App() {
           {/* Transient warning / status banner */}
           <GameMessage message={message} />
 
-          {/* Flexible upper cushion: absorbs excess height gracefully on tall viewports */}
-          <View style={[styles.topCushion, isGameOver && styles.topCushionGameOver]} />
+          {/* Balanced upper breathing room */}
+          <View style={{ height: layoutMetrics.topGap }} />
 
           {/* Centered Board Area */}
           <View style={styles.boardArea}>
@@ -108,6 +113,8 @@ export default function App() {
               revealingRowIndex={revealingRowIndex}
               winningRowIndex={winningRowIndex}
               shakeTrigger={shakeTrigger}
+              tileSize={layoutMetrics.tileSize}
+              tileGap={layoutMetrics.tileGap}
             />
 
             {/* Premium Glassmorphic End-of-game Card */}
@@ -125,14 +132,18 @@ export default function App() {
             )}
           </View>
 
-          {/* Cohesive visual connection bridge between board and keyboard */}
-          <View style={{ height: boardKeyboardGap }} />
+          {/* Distinct, spacious separation between board and keyboard */}
+          <View style={{ height: layoutMetrics.middleGap }} />
 
           {/* In-Game Keyboard with dedicated bottom clearance */}
-          <View style={[styles.keyboardArea, { paddingBottom: bottomBreathingRoom }]}>
+          <View style={[styles.keyboardArea, { paddingBottom: layoutMetrics.bottomGap }]}>
             <GameKeyboard
               onKeyPress={onKeyPress}
               keyboardStatus={keyboardStatus}
+              keyHeight={layoutMetrics.keyHeight}
+              rowGap={layoutMetrics.keyboardRowGap}
+              enterHeight={layoutMetrics.enterButtonHeight}
+              enterGap={layoutMetrics.enterGap}
             />
           </View>
         </View>
@@ -168,6 +179,14 @@ export default function App() {
           onResetData={resetAllData}
           onClose={() => setSettingsVisible(false)}
         />
+
+        {/* Cinematic Animated App Launch Experience */}
+        {showLaunchScreen && (
+          <AppLaunchScreen
+            isReady={isHydrated}
+            onAnimationComplete={() => setShowLaunchScreen(false)}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
@@ -199,16 +218,8 @@ const styles = StyleSheet.create({
   gameArena: {
     flex: 1,
     width: '100%',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-  },
-  topCushion: {
-    flex: 1,
-    minHeight: 6,
-  },
-  topCushionGameOver: {
-    flex: 0.35,
-    minHeight: 2,
   },
   boardArea: {
     width: '100%',
