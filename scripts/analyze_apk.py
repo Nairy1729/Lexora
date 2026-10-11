@@ -1,8 +1,10 @@
+import sys
 import zipfile
 import os
 from collections import defaultdict
 
-APK_PATH = os.path.join(os.path.dirname(__file__), "..", "builds", "lexora-release.apk")
+target_name = sys.argv[1] if len(sys.argv) > 1 else "lexora-release-optimized.apk"
+APK_PATH = os.path.join(os.path.dirname(__file__), "..", "builds", target_name)
 APK_PATH = os.path.abspath(APK_PATH)
 
 def analyze():
