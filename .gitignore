@@ -47,3 +47,8 @@ yarn-error.*
 # screenshots
 screenshot*.png
 scripts/*.png
+
+# media binaries & cache
+*.mp4
+*.wav
+__pycache__/
