@@ -8,7 +8,7 @@ import {
   ScrollView,
   Switch,
 } from 'react-native';
-import { colors, spacing, borderRadius, typography, shadows } from '../../constants/theme';
+import { colors, spacing, borderRadius, typography, shadows, controls } from '../../constants/theme';
 import { layout } from '../../constants/layout';
 import { IconButton } from '../common/IconButton';
 import { GlassView } from '../common/GlassView';
@@ -306,22 +306,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceSubtle,
     borderWidth: 1,
     borderColor: colors.glassBorder,
-    borderRadius: borderRadius.sm + 1,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 40,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.xs,
+    minHeight: controls.buttonHeightMd,
     alignItems: 'center',
     justifyContent: 'center',
   },
   resetButtonText: {
     color: colors.error,
-    fontSize: typography.fontSizes.xs,
+    fontSize: typography.fontSizes.xs + 1,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 0.8,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
 
   confirmBox: {
-    backgroundColor: 'rgba(217, 72, 65, 0.10)',
+    backgroundColor: colors.errorSubtle,
     borderRadius: borderRadius.md,
     borderWidth: 1,
     borderColor: colors.error,
@@ -341,9 +341,9 @@ const styles = StyleSheet.create({
   cancelButton: {
     flex: 1,
     backgroundColor: colors.surfaceElevated,
-    borderRadius: borderRadius.sm + 1,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 38,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.xs,
+    minHeight: controls.buttonHeightSm + 2,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -353,15 +353,15 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: typography.fontSizes.xs,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 0.8,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
-  confirmButton : {
+  confirmButton: {
     flex: 1.2,
     backgroundColor: colors.error,
-    borderRadius: borderRadius.sm,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 38,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.xs,
+    minHeight: controls.buttonHeightSm + 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: typography.fontSizes.xs,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 0.8,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
 
@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
   aboutBrand: {
     fontSize: typography.fontSizes.md,
     fontWeight: typography.fontWeights.black,
-    letterSpacing: typography.letterSpacing.expanded,
+    letterSpacing: typography.letterSpacing.brand,
     color: colors.textPrimary,
     marginBottom: 2,
     includeFontPadding: false,
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   aboutBadge: {
-    fontSize: 10,
+    fontSize: typography.fontSizes.xs - 1,
     fontWeight: typography.fontWeights.medium,
     color: colors.textMuted,
     letterSpacing: 0.5,

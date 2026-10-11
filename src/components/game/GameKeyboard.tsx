@@ -162,10 +162,10 @@ const styles = StyleSheet.create({
     width: '74%',
     maxWidth: 300,
     minWidth: 180,
-    backgroundColor: '#261D17', // Warm dark espresso matching Lexora palette
-    borderRadius: borderRadius.md + 1,
+    backgroundColor: colors.enterBackground,
+    borderRadius: borderRadius.lg,
     borderWidth: 1,
-    borderColor: 'rgba(255, 122, 0, 0.40)', // Subtle, elegant orange accent border
+    borderColor: colors.enterBorder,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -175,18 +175,18 @@ const styles = StyleSheet.create({
     userSelect: 'none',
   },
   enterButtonHovered: {
-    backgroundColor: '#30241C',
-    borderColor: 'rgba(255, 122, 0, 0.65)',
+    backgroundColor: colors.enterBackgroundHovered,
+    borderColor: colors.enterBorderHovered,
   },
   enterButtonPressedNative: {
-    backgroundColor: colors.keyBackgroundPressed,
-    borderColor: colors.primary,
+    backgroundColor: colors.enterBackgroundPressed,
+    borderColor: colors.enterBorderPressed,
     opacity: 0.88,
     transform: [{ scale: 0.98 }],
   },
   enterButtonPressedWeb: {
-    backgroundColor: colors.keyBackgroundPressed,
-    borderColor: colors.primary,
+    backgroundColor: colors.enterBackgroundPressed,
+    borderColor: colors.enterBorderPressed,
     opacity: 0.90,
   },
   enterContentRow: {
@@ -199,11 +199,11 @@ const styles = StyleSheet.create({
     width: 5,
     height: 5,
     borderRadius: 2.5,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.enterPip,
     opacity: 0.90,
   },
   enterButtonText: {
-    color: colors.textPrimary,
+    color: colors.enterText,
     fontSize: typography.fontSizes.xs + 1,
     fontWeight: typography.fontWeights.bold,
     letterSpacing: 2.5,

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { StoredGameStats } from '../../storage/statsStorage';
-import { colors, spacing, borderRadius, typography, shadows } from '../../constants/theme';
+import { colors, spacing, borderRadius, typography, shadows, controls } from '../../constants/theme';
 import { layout } from '../../constants/layout';
 import { getMsUntilNextUtcMidnight, formatTimeRemaining } from '../../utils/time';
 import { shareGameResult, copyShareTextToClipboard } from '../../utils/share';
@@ -397,9 +397,9 @@ const styles = StyleSheet.create({
   },
   shareButton: {
     backgroundColor: colors.primary,
-    borderRadius: borderRadius.sm + 1,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 40,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.xs,
+    minHeight: controls.buttonHeightMd,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -409,16 +409,16 @@ const styles = StyleSheet.create({
     color: colors.textInverse,
     fontSize: typography.fontSizes.xs + 1,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 1,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
   copyButton: {
     backgroundColor: colors.surfaceElevated,
     borderColor: colors.glassBorderHighlight,
     borderWidth: 1,
-    borderRadius: borderRadius.sm + 1,
-    paddingVertical: spacing.xs + 2,
-    minHeight: 36,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.xs,
+    minHeight: controls.buttonHeightSm,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -426,7 +426,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: typography.fontSizes.xs,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 1,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
 });

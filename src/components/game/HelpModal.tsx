@@ -190,11 +190,11 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   scheduleBox: {
-    backgroundColor: colors.surfaceElevated,
+    backgroundColor: colors.surfaceSubtle,
     borderRadius: borderRadius.md,
     padding: spacing.sm + 2,
     borderWidth: 1,
-    borderColor: colors.borderSubtle,
+    borderColor: colors.glassBorder,
   },
   scheduleHeader: {
     fontSize: typography.fontSizes.xs,

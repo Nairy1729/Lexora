@@ -9,7 +9,7 @@ import {
 import Animated, {
   FadeInUp,
 } from 'react-native-reanimated';
-import { colors, spacing, borderRadius, typography } from '../../constants/theme';
+import { colors, spacing, borderRadius, typography, controls } from '../../constants/theme';
 import { layout } from '../../constants/layout';
 import { GlassView } from '../common/GlassView';
 import { GameStatus } from '../../types/game';
@@ -28,7 +28,7 @@ export interface GameOverPanelProps {
 
 /**
  * Premium glassmorphic Game Over result card.
- * Context-aware for Daily and Practice game modes.
+ * Context-aware for Daily and Practice game modes with standardized design system buttons.
  */
 export const GameOverPanel: React.FC<GameOverPanelProps> = ({
   gameStatus,
@@ -110,7 +110,7 @@ export const GameOverPanel: React.FC<GameOverPanelProps> = ({
           </Text>
         </View>
 
-        {/* Action Buttons Row */}
+        {/* Standardized Action Buttons Row */}
         <View style={styles.actionsRow}>
           {/* Primary Action: Share Result */}
           <Pressable
@@ -199,9 +199,9 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   card: {
-    paddingVertical: spacing.sm + 2,
+    paddingVertical: spacing.md,
     paddingHorizontal: spacing.md,
-    borderRadius: borderRadius.lg,
+    borderRadius: borderRadius.xl,
   },
   headerContainer: {
     alignItems: 'center',
@@ -248,10 +248,10 @@ const styles = StyleSheet.create({
   primaryButton: {
     flex: 1.1,
     backgroundColor: colors.primary,
-    paddingVertical: spacing.xs + 2,
+    paddingVertical: spacing.xs,
     paddingHorizontal: spacing.xs,
-    borderRadius: borderRadius.sm + 1,
-    minHeight: 40,
+    borderRadius: borderRadius.lg,
+    minHeight: controls.buttonHeightMd,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -259,18 +259,18 @@ const styles = StyleSheet.create({
   },
   primaryButtonText: {
     color: colors.textInverse,
-    fontSize: typography.fontSizes.xs,
+    fontSize: typography.fontSizes.xs + 1,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 0.6,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
   secondaryButton: {
     flex: 1,
     backgroundColor: colors.surfaceElevated,
-    paddingVertical: spacing.xs + 2,
+    paddingVertical: spacing.xs,
     paddingHorizontal: spacing.xs,
-    borderRadius: borderRadius.sm + 1,
-    minHeight: 40,
+    borderRadius: borderRadius.lg,
+    minHeight: controls.buttonHeightMd,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -278,13 +278,13 @@ const styles = StyleSheet.create({
   },
   secondaryButtonText: {
     color: colors.textPrimary,
-    fontSize: typography.fontSizes.xs,
+    fontSize: typography.fontSizes.xs + 1,
     fontWeight: typography.fontWeights.bold,
-    letterSpacing: 0.6,
+    letterSpacing: typography.letterSpacing.wide,
     includeFontPadding: false,
   },
   pressed: {
-    opacity: 0.72,
+    opacity: 0.76,
     transform: [{ scale: 0.98 }],
   },
 });

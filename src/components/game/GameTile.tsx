@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   tileBase: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: borderRadius.sm + 1,
+    borderRadius: borderRadius.sm,
     borderWidth: 1.5,
   },
   letterText: {
@@ -186,28 +186,27 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   tileEmpty: {
-    backgroundColor: 'transparent',
+    backgroundColor: colors.empty,
     borderColor: colors.border,
   },
   tileTbd: {
     backgroundColor: colors.surface,
     borderColor: colors.borderLight,
-    borderWidth: 2,
   },
   tileCorrect: {
     backgroundColor: colors.correct,
-    borderColor: colors.correct,
+    borderColor: colors.correctBorder,
   },
   tilePresent: {
     backgroundColor: colors.present,
-    borderColor: colors.present,
+    borderColor: colors.presentBorder,
   },
   tileAbsent: {
     backgroundColor: colors.absent,
-    borderColor: colors.absent,
+    borderColor: colors.absentBorder,
   },
   tileWinningGlow: {
-    borderColor: '#72B06D',
+    borderColor: colors.winningGlowBorder,
     shadowColor: colors.correct,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.55,

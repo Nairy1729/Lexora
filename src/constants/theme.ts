@@ -1,16 +1,16 @@
 /**
- * Lexora - Core Theme & Design Tokens
+ * Lexora - Design System Tokens & Specifications
  * 
  * Strict palette constraints:
- * - Primary orange: #FF7A00 (brand accent)
- * - Main background: #1A100A
- * - Elevated surface: #292019
- * - Primary text: #FFF8F0
- * - Secondary text: #B8AAA0
- * - Border: #45372E
- * - Correct letter: #538D4E
- * - Present letter: #B59F3B
- * - Absent letter: #49413B
+ * - Background: #1A100A (dark espresso)
+ * - Elevated surface: #292019 (warm dark charcoal)
+ * - Primary text: #FFF8F0 (warm ivory)
+ * - Secondary text: #B8AAA0 (stone)
+ * - Border: #45372E (subtle bronze border)
+ * - Brand orange: #FF7A00 (editorial accent)
+ * - Correct letter: #538D4E (muted forest green)
+ * - Present letter: #B59F3B (warm ochre gold)
+ * - Absent letter: #49413B (dark slate)
  */
 
 export const colors = {
@@ -19,46 +19,68 @@ export const colors = {
   primaryMuted: '#B35600',
   primaryDark: '#803D00',
   primarySubtle: '#2A170A',
+  primaryBorderGlow: 'rgba(255, 122, 0, 0.40)',
+  primaryGlowSubtle: 'rgba(255, 122, 0, 0.15)',
 
   // Surfaces & Backgrounds
   background: '#1A100A',
   surface: '#292019',
   surfaceElevated: '#382D24',
   surfaceSubtle: '#211812',
+  surfaceDark: '#140C07',
 
   // Text
   textPrimary: '#FFF8F0',
   textSecondary: '#B8AAA0',
   textMuted: '#7D7066',
   textInverse: '#1A100A',
+  textWhite: '#FFFFFF',
 
   // Borders & Dividers
   border: '#45372E',
   borderLight: '#5A483D',
   borderSubtle: '#332720',
+  borderHighlight: 'rgba(255, 248, 240, 0.12)',
 
   // Wordle Letter Feedback
   correct: '#538D4E',      // Green: letter in correct slot
+  correctBorder: '#5B9A56',
   present: '#B59F3B',      // Yellow: letter present, wrong slot
+  presentBorder: '#C0AA3F',
   absent: '#49413B',       // Dark gray: letter absent from solution
+  absentBorder: '#3D3631',
   empty: 'transparent',
   tbd: '#45372E',          // Border for typed unsubmitted tile
+  winningGlowBorder: '#72B06D',
 
-  // Keyboard - Lexora Dark Glass Design System
-  keyBackground: '#292019',           // Warm, dark, understated surface (matches Lexora surface)
-  keyBackgroundElevated: '#332820',   // Subtly elevated surface for action keys (ENTER, BACKSPACE)
-  keyBackgroundPressed: '#3D3025',    // Subtle warm pressed state
-  keyBackgroundHovered: '#31271F',    // Desktop hover state
-  keyBorder: '#45372E',               // Fine, restrained border (matches Lexora border token)
-  keyBorderElevated: '#4D3E33',       // Action key border
-  keyBorderHighlight: 'rgba(255, 248, 240, 0.16)', // Subtle keycap highlight
-  keyText: '#FFF8F0',                 // Primary warm ivory
-  keyTextSecondary: '#B8AAA0',        // Secondary stone text (absent keys)
-  keyTextMuted: '#7D7066',            // Muted text
+  // Keyboard Design System
+  keyBackground: '#292019',
+  keyBackgroundElevated: '#332820',
+  keyBackgroundPressed: '#3D3025',
+  keyBackgroundHovered: '#31271F',
+  keyBorder: '#45372E',
+  keyBorderElevated: '#4D3E33',
+  keyBorderHighlight: 'rgba(255, 248, 240, 0.16)',
+  keyBorderPressed: 'rgba(255, 122, 0, 0.40)',
+  keyText: '#FFF8F0',
+  keyTextSecondary: '#B8AAA0',
+  keyTextMuted: '#7D7066',
+  keyTextEvaluated: '#FFFFFF',
+
+  // Standalone ENTER Button
+  enterBackground: '#261D17',
+  enterBackgroundHovered: '#30241C',
+  enterBackgroundPressed: '#3D3025',
+  enterBorder: 'rgba(255, 122, 0, 0.40)',
+  enterBorderHovered: 'rgba(255, 122, 0, 0.65)',
+  enterBorderPressed: '#FF7A00',
+  enterPip: '#FF7A00',
+  enterText: '#FFF8F0',
 
   // State indicators
   success: '#538D4E',
   error: '#D94841',
+  errorSubtle: 'rgba(217, 72, 65, 0.12)',
   warning: '#B59F3B',
 
   // Overlays & Glassmorphism
@@ -73,6 +95,7 @@ export const colors = {
   glassHighlight: 'rgba(255, 248, 240, 0.09)',
   glowPrimary: 'rgba(255, 122, 0, 0.25)',
   glowSuccess: 'rgba(83, 141, 78, 0.32)',
+  ambientGlow: 'rgba(255, 122, 0, 0.045)',
 } as const;
 
 export const shadows = {
@@ -134,11 +157,11 @@ export const spacing = {
 
 export const borderRadius = {
   xs: 2,
-  sm: 4,
-  md: 6,
-  lg: 8,
-  xl: 12,
-  pill: 9999,
+  sm: 4,      // Wordle tiles
+  md: 6,      // Keyboard keys, standard inputs
+  lg: 8,      // Action buttons, cards
+  xl: 12,     // Modal cards, major panels
+  pill: 9999, // Badges, pill buttons
 } as const;
 
 export const typography = {
@@ -150,6 +173,7 @@ export const typography = {
     xl: 20,
     xxl: 26,
     display: 34,
+    hero: 38,
   },
   fontWeights: {
     regular: '400' as const,
@@ -161,10 +185,18 @@ export const typography = {
   letterSpacing: {
     tight: -0.5,
     normal: 0,
-    wide: 1,
-    expanded: 2,
+    wide: 0.8,
+    expanded: 1.5,
     brand: 4,
+    brandHero: 6,
   },
+} as const;
+
+export const controls = {
+  buttonHeightSm: 36,
+  buttonHeightMd: 42,
+  buttonHeightLg: 48,
+  minTouchTarget: 44,
 } as const;
 
 export const theme = {
@@ -173,6 +205,7 @@ export const theme = {
   spacing,
   borderRadius,
   typography,
+  controls,
 } as const;
 
 export type Theme = typeof theme;

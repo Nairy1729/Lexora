@@ -346,14 +346,14 @@ const styles = StyleSheet.create({
     width: 320,
     height: 320,
     borderRadius: 160,
-    backgroundColor: 'rgba(255, 122, 0, 0.055)',
+    backgroundColor: colors.primaryGlowSubtle,
   },
   glowInner: {
     position: 'absolute',
     width: 190,
     height: 190,
     borderRadius: 95,
-    backgroundColor: 'rgba(255, 122, 0, 0.045)',
+    backgroundColor: colors.ambientGlow,
   },
   content: {
     alignItems: 'center',
@@ -369,9 +369,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   wordmarkText: {
-    fontSize: 38,
+    fontSize: typography.fontSizes.hero,
     fontWeight: typography.fontWeights.black,
-    letterSpacing: Platform.OS === 'web' ? 7 : 6,
+    letterSpacing: Platform.OS === 'web' ? typography.letterSpacing.brandHero + 1 : typography.letterSpacing.brandHero,
     color: colors.textPrimary,
     includeFontPadding: false,
   },
@@ -380,9 +380,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   accentOText: {
-    fontSize: 38,
+    fontSize: typography.fontSizes.hero,
     fontWeight: typography.fontWeights.black,
-    letterSpacing: Platform.OS === 'web' ? 7 : 6,
+    letterSpacing: Platform.OS === 'web' ? typography.letterSpacing.brandHero + 1 : typography.letterSpacing.brandHero,
     color: colors.primary,
     includeFontPadding: false,
   },
@@ -406,13 +406,13 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: borderRadius.md,
     borderWidth: 1.5,
-    borderColor: colors.border, // #45372E
-    backgroundColor: colors.surface, // #292019
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tileAccent: {
-    borderColor: 'rgba(255, 122, 0, 0.55)',
+    borderColor: colors.primaryBorderGlow,
   },
   tileAccentPip: {
     width: 6,

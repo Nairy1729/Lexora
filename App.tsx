@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 280,
     borderRadius: 140,
-    backgroundColor: 'rgba(255, 122, 0, 0.045)',
+    backgroundColor: colors.ambientGlow,
   },
   gameArena: {
     flex: 1,

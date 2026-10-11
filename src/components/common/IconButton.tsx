@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   ViewStyle,
+  Platform,
 } from 'react-native';
 import { colors, borderRadius, typography } from '../../constants/theme';
 import { layout } from '../../constants/layout';
@@ -94,9 +95,19 @@ export const IconButton: React.FC<IconButtonProps> = ({
     }
   };
 
+  const isWeb = Platform.OS === 'web';
+
+  const handlePress = (e?: unknown) => {
+    if (isWeb && e && typeof e === 'object' && 'target' in e) {
+      const target = (e as { target?: { blur?: () => void } }).target;
+      target?.blur?.();
+    }
+    onPress();
+  };
+
   return (
     <Pressable
-      onPress={onPress}
+      onPress={handlePress}
       disabled={disabled}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
@@ -104,6 +115,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
       hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       style={({ pressed }) => [
         styles.touchTarget,
+        isWeb && styles.webTarget,
         pressed && !disabled && styles.pressed,
         disabled && styles.disabled,
         style,
@@ -121,6 +133,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: borderRadius.md,
+  },
+  webTarget: {
+    outlineStyle: 'none' as unknown as undefined,
+    cursor: 'pointer' as unknown as undefined,
   },
   pressed: {
     opacity: 0.6,

@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   base: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: borderRadius.md,
+    borderRadius: borderRadius.lg,
     minHeight: layout.minTouchTarget,
     paddingHorizontal: spacing.lg,
   },

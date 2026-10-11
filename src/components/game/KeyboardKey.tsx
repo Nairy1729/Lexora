@@ -137,30 +137,30 @@ const styles = StyleSheet.create({
     opacity: 0.84,
     transform: [{ scale: 0.96 }],
     backgroundColor: colors.keyBackgroundPressed,
-    borderColor: 'rgba(255, 122, 0, 0.40)',
+    borderColor: colors.keyBorderPressed,
   },
   // On web: avoid scaling down, which shrinks element out from under mouse cursor.
   pressedWeb: {
     opacity: 0.86,
     backgroundColor: colors.keyBackgroundPressed,
-    borderColor: 'rgba(255, 122, 0, 0.40)',
+    borderColor: colors.keyBorderPressed,
   },
 
   // Hover states on web:
   keyHovered: {
-    backgroundColor: colors.keyBackgroundHovered, // #31271F
-    borderColor: 'rgba(255, 248, 240, 0.20)',
+    backgroundColor: colors.keyBackgroundHovered,
+    borderColor: colors.borderHighlight,
   },
   actionKeyHovered: {
-    backgroundColor: '#3A2E24',
-    borderColor: 'rgba(255, 122, 0, 0.35)',
+    backgroundColor: colors.keyBackgroundElevated,
+    borderColor: colors.primaryBorderGlow,
   },
 
   // Key typography: clear, medium-weight uppercase letters with excellent readability
   keyText: {
     fontSize: typography.fontSizes.sm + 1, // ~14px
     fontWeight: typography.fontWeights.semiBold, // '600'
-    color: colors.keyText, // #FFF8F0
+    color: colors.keyText,
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
@@ -184,33 +184,33 @@ const styles = StyleSheet.create({
     userSelect: 'none',
   },
   absentText: {
-    color: colors.keyTextSecondary, // #B8AAA0
+    color: colors.keyTextSecondary,
   },
   evaluatedText: {
-    color: '#FFFFFF',
+    color: colors.keyTextEvaluated,
     fontWeight: typography.fontWeights.semiBold,
   },
 
   // State colors: warm dark surfaces, restrained depth, zero harsh neon
   keyUnused: {
-    backgroundColor: colors.keyBackground, // #292019
-    borderColor: colors.keyBorder, // #45372E
+    backgroundColor: colors.keyBackground,
+    borderColor: colors.keyBorder,
   },
   actionKeyUnused: {
-    backgroundColor: colors.keyBackgroundElevated, // #332820
-    borderColor: colors.keyBorderElevated, // #4D3E33
+    backgroundColor: colors.keyBackgroundElevated,
+    borderColor: colors.keyBorderElevated,
   },
   keyCorrect: {
-    backgroundColor: colors.correct, // #538D4E
-    borderColor: '#5B9A56',
+    backgroundColor: colors.correct,
+    borderColor: colors.correctBorder,
   },
   keyPresent: {
-    backgroundColor: colors.present, // #B59F3B
-    borderColor: '#C0AA3F',
+    backgroundColor: colors.present,
+    borderColor: colors.presentBorder,
   },
   keyAbsent: {
-    backgroundColor: colors.absent, // #49413B
-    borderColor: '#3D3631',
+    backgroundColor: colors.absent,
+    borderColor: colors.absentBorder,
     opacity: 0.70,
   },
 });
